@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
+
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
-const bodyParser = require('body-parser');
 
+const bodyParser = require('body-parser');
 const routes = require('./routes/');
 
 app.use(morgan('tiny'));
@@ -18,7 +19,7 @@ app.engine('html', nunjucks.render);
 nunjucks.configure('views', { noCache: true });
 
 // static thing belongs here and not in index.js, I think?
-app.use(express.static('public'));
+app.use('/stylesheets', express.static('public/stylesheets'))
 
 app.use('/', routes); // THIS IS WHAT WAS MISSING
 
