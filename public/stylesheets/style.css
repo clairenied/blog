@@ -1,8 +1,85 @@
 body {
-	background-color: #cc0066;
+	margin: 0;
+	background-color: #d63173;
+	color: #ededed;
+	font-family: 'Work Sans', sans-serif;
 }
 
-p {
-	color: #cc0066;
-	font-weight: bold;
+a {
+	color: #ededed;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #e0e0e0;
+}
+
+.navbar {
+	overflow: auto;
+	padding: 1.25rem;
+	margin: 0;
+	height: 100%;
+
+}
+
+.navbar-link-container {
+	margin: 0 1.25rem;
+	display: inline-block;
+	float: right;
+}
+
+.title {
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+	display: inline-block;
+	text-decoration: underline;
+}
+
+.main {
+	margin: 0 auto;
+	width: 70vw;
+}
+
+.post {
+	border-top: 2px solid;
+	margin-bottom: 1.25rem;
+	padding-top: 1.25rem;
+}
+
+input {
+	display: block;
+	width: 100%;
+	padding: 0.5rem 0;
+	margin: 1rem 0;
+	border: none;
+	background-color: #c41363;
+	font-size: 16px;
+	color: #ededed;
+}
+
+textarea {
+	display: block;
+	width: 100%;
+	margin: 1rem 0;
+	padding: 0.5rem 0;
+	border: none;
+	background-color: #c41363;
+	height: 6rem;
+	font-size: 16px;
+	color: #ededed;
+}
+
+button {
+	border: 2px solid;
+	background-color: #d63173;
+	padding: 0.5rem;
+	font-size: 16px;
+	color: #ededed;
+	margin: 0 auto;
+}
+
+button:hover {
+	cursor: pointer;
+	color: #e0e0e0;
 }

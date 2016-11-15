@@ -31,7 +31,7 @@ router.get('/posts', function(req, res, next){
 })
 
 router.get('/posts/create', function(req, res, next){
-	res.render('post')
+	res.render('add-post')
 })
 
 router.get('/about', function(req, res, next){
