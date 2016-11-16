@@ -24,7 +24,7 @@ nunjucks.configure('views', { noCache: true });
 app.use('/stylesheets', express.static('public/stylesheets'))
 
 
-models.blogDb.sync({ force: true })
+models.blogDb.sync()
 .then(function () {
   app.listen(3000, function () {
       console.log('Server is listening on port 3000');

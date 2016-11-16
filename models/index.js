@@ -2,7 +2,7 @@ var Sequelize = require('sequelize')
 var blogDb = new Sequelize('postgres://localhost:5432/blogdb')
 
 let postSchema = {
-	title: { 
+	title: {
 		type: Sequelize.STRING,
 		allowNull: false
 	},

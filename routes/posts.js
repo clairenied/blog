@@ -11,33 +11,32 @@ const User = models.User;
 // })
 
 router.get('/create', function(req, res, next){
-	res.render('add-post')
-})
+	res.render('add-post');
+});
 
 router.post('/create', function(req, res, next){
 	let userPromise = User.findOrCreate({
     where: {
       username: req.body.username
     }
-  })
+  });
 
   let postPromise = Post.create({
     title: req.body.title,
     content: req.body.content,
     tags: req.body.tags
-  })
+  });
 
   Promise.all([userPromise, postPromise])
   .spread(function (user, post) {
-  	console.log('post', post)
     return post.addUser(user[0]);
   })
   .then(function (createdPost) {
-  	console.log('CREATED POST', createdPost[0][0])
+    console.log('CREATED POST', createdPost[0][0]);
     res.redirect('/post/' + createdPost[0][0].postId);
   })
   .catch(next);
-})
+});
 
 router.get('/:id', function(req, res, next){
 	Post.findOne({
@@ -51,23 +50,23 @@ router.get('/:id', function(req, res, next){
     //     { model: User, as: 'user' }
     // ]
   })
-  .then(function (post) {
-	  if (post === null) {
-	    var error = new Error('That post was not found!');
-	    error.status = 404;
-	    return next(error);
-	  }
-	  console.log(post);
-	  return post.getUsers()
-    .then(function (username) { // Nested .then so we can remember `post`
-      post.username = username;
+  .then(function (data) {
+	  // if (data === null) {
+	  //   var error = new Error('That post was not found!');
+	  //   error.status = 404;
+	  //   return next(error);
+	  // }
+    req.post = data;
+	  return data.getUsers()
+  })
+  .then(function (users) { // Don't need to nest because we saved data as req.post
       res.render('post', {
-        post: post
+        post: req.post,
+        user: users[0], // bc 'users' is an array of users
       });
-    });
   })
   .catch(next);
 	// res.render('post')
 })
 
-module.exports = router
+module.exports = router;

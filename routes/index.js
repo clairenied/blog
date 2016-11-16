@@ -15,7 +15,7 @@ router.use('/post', postsRouter);
 router.use('/user', usersRouter);
 
 router.use('/', function(req, res, next){
-	console.log(chalk.cyan('Hello there'))
+	console.log(chalk.cyan("I'm routing you from routes/index.js"))
 	next();
 })
 
