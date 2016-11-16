@@ -7,6 +7,8 @@ const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
 const routes = require('./routes/');
 
+const models = require('./models')
+
 app.use(morgan('tiny'));
 
 // body parser for form input
@@ -21,8 +23,13 @@ nunjucks.configure('views', { noCache: true });
 // static thing belongs here and not in index.js, I think?
 app.use('/stylesheets', express.static('public/stylesheets'))
 
-app.use('/', routes); // THIS IS WHAT WAS MISSING
 
-app.listen(3000, function(){
-  console.log('we are listening to youuuuu');
-});
+models.blogDb.sync({ force: true })
+.then(function () {
+  app.listen(3000, function () {
+      console.log('Server is listening on port 3000');
+  });
+})
+.catch(console.error);
+
+app.use('/', routes); // THIS IS WHAT WAS MISSING

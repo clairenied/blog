@@ -1,41 +1,32 @@
 const express = require('express');
 const router = express.Router();
-
 const chalk = require('chalk');
 
-router.use('/stylesheets', express.static('public/stylesheets'))
+const models = require('../models')
+const Post = models.Post;
+const User = models.User;
+
+const aboutRouter = require('./about.js')
+const postsRouter = require('./posts.js')
+const usersRouter = require('./users.js')
+
+router.use('/about', aboutRouter);
+router.use('/post', postsRouter);
+router.use('/user', usersRouter);
 
 router.use('/', function(req, res, next){
 	console.log(chalk.cyan('Hello there'))
 	next();
 })
 
-//Dear Jean, should we ever make an API that sends women across the series of tubes
-//that is the internet, or something... here is how one might send some JSON.
-//Yours, Claire
-//PS This is what Zeke added, and while it's not immediately pertinent, I thought
-//that you might be into it.
-// router.get('/', function(req, res, next){
-// 	res.json({
-// 		foo: 'bar'
-// 	})
-// });
-
-
 router.get('/', function(req,res,next){
-	res.render('index')
-})
-
-router.get('/posts', function(req, res, next){
-	res.render('post')
-})
-
-router.get('/posts/create', function(req, res, next){
-	res.render('add-post')
-})
-
-router.get('/about', function(req, res, next){
-	res.render('about')
+	Post.findAll({})
+    .then(function (posts) {
+      res.render('index', {
+        posts: posts
+      });
+    })
+    .catch(next);
 })
 
 module.exports = router;

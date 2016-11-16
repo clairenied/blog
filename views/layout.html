@@ -26,35 +26,24 @@
   </head>
 
   <body>
-
-    <!-- Wrap all page content here -->
     <div>
 
       <div class="navbar">
-        <div class="navbar-link-container">Contact</div>
-        <div class="navbar-link-container">About</div>
-        <div class="navbar-link-container"><a href="/posts/create">Add Post</a></div>
+        <div class="navbar-link-container"><a href="/about">About</a></div>
+        <div class="navbar-link-container"><a href="/post/create">Add Post</a></div>
       </div>
     	<div class="title"><h1><a href="/">Blog</a></h1></div>
 
       <!-- Begin page content -->
       <div class="main">
-        {% block content %}Welcome to Twitter.js{% endblock %}
+        {% block content %}{% endblock %}
       </div> <!-- end container -->
       
     </div>
-
-<!--     <div id="footer">
-      <div class="container">
-      </div>
-    </div> -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/client/socket.js"></script>
   </body>
 </html>

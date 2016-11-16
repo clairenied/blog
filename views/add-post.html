@@ -1,28 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  
-  <div>
+
+	<form method="POST">
     <h2>Add Post</h2>
-  </div>
+  	<label for="username">Username</label>
+  	<input type="text" name="username"/>
 
-  <div class="post">
-  	<form method="POST">
-	  	<label for="username">Username</label>
-	  	<input type="text" name="username"/>
+  	<label for="title">Title</label>
+  	<input type="text" name="title"/>
 
-	  	<label for="title">Title</label>
-	  	<input type="text" name="title"/>
+  	<label for="content">Content</label>
+  	<textarea name="content"></textarea>
 
-	  	<label for="content">Content</label>
-	  	<textarea name="content"></textarea>
+  	<label for="tags">Tags</label>
+  	<input type="text" name="tags"/>
 
-	  	<label for="tags">Tags</label>
-	  	<input type="text" name="tags"/>
-
-	  	<!-- To-do: add save draft feature -->
-	  	<button>Submit</button>
-  	</form>
-  </div>
+  	<!-- To-do: add save draft feature -->
+  	<button>Submit</button>
+	</form>
     
 {% endblock %}
