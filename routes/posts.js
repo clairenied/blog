@@ -6,16 +6,12 @@ const models = require('../models')
 const Post = models.Post;
 const User = models.User;
 
-// router.get('/:id', function(req, res, next){
-// 	res.render('post')
-// })
-
 router.get('/create', function(req, res, next){
-	res.render('add-post');
+  res.render('add-post');
 });
 
 router.post('/create', function(req, res, next){
-	let userPromise = User.findOrCreate({
+  let userPromise = User.findOrCreate({
     where: {
       username: req.body.username
     }
@@ -38,8 +34,10 @@ router.post('/create', function(req, res, next){
   .catch(next);
 });
 
+// get single post by id
 router.get('/:id', function(req, res, next){
-	Post.findOne({
+	let post;
+  Post.findOne({
     where: {
       id: req.params.id
     }
@@ -56,17 +54,17 @@ router.get('/:id', function(req, res, next){
 	  //   error.status = 404;
 	  //   return next(error);
 	  // }
-    req.post = data;
+    post = data;
 	  return data.getUsers()
   })
-  .then(function (users) { // Don't need to nest because we saved data as req.post
-      res.render('post', {
-        post: req.post,
+  .then(function (users) { // Don't need to nest because we saved data as post
+      res.render('view-single-post', {
+        post: post,
         user: users[0], // bc 'users' is an array of users
       });
   })
   .catch(next);
 	// res.render('post')
-})
+});
 
 module.exports = router;

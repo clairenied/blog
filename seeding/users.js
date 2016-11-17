@@ -22,13 +22,13 @@ const buildUsers = () => {
     lastName: 'Chung',
     pictureUrl: 'http://i.imgur.com/bI1zf2b.jpg',
     username: 'jeanbean',
-    mail: 'jean@jean.com'
+    email: 'jean@jean.com'
   }, {
     firstName: 'Claire',
     lastName: 'Niederberger',
     pictureUrl: 'http://i.imgur.com/1uTV9v2.jpg',
     username: 'clairebear',
-    mail: 'claire@claire.com'
+    email: 'claire@claire.com'
   }];
 
   // // 98 random users

@@ -3,12 +3,13 @@ const app = express();
 
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
-
 const bodyParser = require('body-parser');
+
 const routes = require('./routes/');
+const models = require('./models');
+const seeder = require('./seeding/seed');
 
-const models = require('./models')
-
+// logger
 app.use(morgan('tiny'));
 
 // body parser for form input
@@ -21,9 +22,12 @@ app.engine('html', nunjucks.render);
 nunjucks.configure('views', { noCache: true });
 
 // static thing belongs here and not in index.js, I think?
-app.use('/stylesheets', express.static('public/stylesheets'))
+app.use('/stylesheets', express.static('public/stylesheets'));
 
 
+// ONLY RUN TO RESEED FROM SCRATCH
+// seeder()
+// RUN OTHERWISE
 models.blogDb.sync()
 .then(function () {
   app.listen(3000, function () {
@@ -32,4 +36,4 @@ models.blogDb.sync()
 })
 .catch(console.error);
 
-app.use('/', routes); // THIS IS WHAT WAS MISSING
+app.use('/', routes);
