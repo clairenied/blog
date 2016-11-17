@@ -1,5 +1,6 @@
-var Sequelize = require('sequelize')
-var blogDb = new Sequelize('postgres://localhost:5432/blogdb')
+const Sequelize = require('sequelize');
+const blogDb = new Sequelize('postgres://localhost:5432/blogdb');
+const marked = require('marked');
 
 let postSchema = {
 	title: {
@@ -27,7 +28,13 @@ let postSchema = {
   }
 }
 
-var postConfig = {}
+var postConfig = {
+  getterMethods: {
+    renderedContent: function() {
+      return marked(this.content);
+    }
+  }
+};
 var Post = blogDb.define('post', postSchema, postConfig)
 
 
@@ -48,7 +55,8 @@ let userSchema = {
 	// To-do: have usernames that are not just email addresses/first names
 	username: {
 		type: Sequelize.STRING,
-		allowNull: false
+		allowNull: false,
+    unique: true
 	},
 	email: {
 		type: Sequelize.STRING,
@@ -60,6 +68,11 @@ let userSchema = {
 }
 
 var userConfig = {
+  getterMethods: {
+    fullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  }
 	// instanceMethods: {
 	// 	ban: function(){}
 	// },
